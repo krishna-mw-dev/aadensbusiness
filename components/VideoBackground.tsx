@@ -40,11 +40,72 @@ export function VideoBackground({
   const containerRef = useRef<HTMLDivElement>(null);
   const [isPlaying, setIsPlaying] = useState(true);
   const [isLoaded, setIsLoaded] = useState(false);
+  const [isNearViewport, setIsNearViewport] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
 
   const togglePlay = (e: React.MouseEvent) => {
     e.stopPropagation();
     setIsPlaying(!isPlaying);
   };
+
+  // 1. Intersection Observer to detect when the video is close to viewport (lazy load) and actively visible (play/pause)
+  useEffect(() => {
+    const container = containerRef.current;
+    if (!container) return;
+
+    // Use a pre-load margin observer: trigger loading 300px before the video enters screen
+    const loadObserver = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsNearViewport(true);
+          loadObserver.disconnect(); // Once we trigger loading, we don't need to check anymore
+        }
+      },
+      { rootMargin: "300px" }
+    );
+    loadObserver.observe(container);
+
+    // Playback observer: check if the video is actively visible to play/pause
+    const playbackObserver = new IntersectionObserver(
+      ([entry]) => {
+        setIsVisible(entry.isIntersecting);
+      },
+      { threshold: 0.05 } // 5% visibility is enough to play
+    );
+    playbackObserver.observe(container);
+
+    return () => {
+      loadObserver.disconnect();
+      playbackObserver.disconnect();
+    };
+  }, []);
+
+  // 2. Play/Pause based on user play state, motion configuration, and viewport visibility
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    if (isPlaying && isMotionEnabled && isVisible) {
+      video.play().catch(() => setIsPlaying(false));
+    } else {
+      video.pause();
+    }
+  }, [isPlaying, isMotionEnabled, isVisible]);
+
+  useEffect(() => {
+    if (parallaxSpeed === 0 || fixed) return;
+
+    const handleScroll = () => {
+      if (!containerRef.current || !videoRef.current) return;
+      const rect = containerRef.current.getBoundingClientRect();
+      const scrolled = window.scrollY;
+      const offset = (scrolled - rect.top) * parallaxSpeed;
+      videoRef.current.style.transform = `translate3d(0, ${offset}px, 0)`;
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [parallaxSpeed, fixed]);
 
   if (!src || (Array.isArray(src) && src.length === 0)) {
     return (
@@ -67,37 +128,6 @@ export function VideoBackground({
     );
   }
 
-  useEffect(() => {
-    const video = videoRef.current;
-    if (!video) return;
-
-    // Force load if readyState is already sufficient
-    if (video.readyState >= 3) {
-      setIsLoaded(true);
-    }
-
-    if (isPlaying && isMotionEnabled) {
-      video.play().catch(() => setIsPlaying(false));
-    } else {
-      video.pause();
-    }
-  }, [isPlaying, isMotionEnabled]);
-
-  useEffect(() => {
-    if (parallaxSpeed === 0 || fixed) return;
-
-    const handleScroll = () => {
-      if (!containerRef.current || !videoRef.current) return;
-      const rect = containerRef.current.getBoundingClientRect();
-      const scrolled = window.scrollY;
-      const offset = (scrolled - rect.top) * parallaxSpeed;
-      videoRef.current.style.transform = `translate3d(0, ${offset}px, 0)`;
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, [parallaxSpeed, fixed]);
-
   return (
     <div
       ref={containerRef}
@@ -107,28 +137,39 @@ export function VideoBackground({
         className
       )}
     >
-      <video
-        ref={videoRef}
-        autoPlay
-        muted
-        loop
-        playsInline
-        poster={poster}
-        onCanPlay={() => setIsLoaded(true)}
-        className={cn(
-          "h-full w-full object-cover transition-opacity duration-1000",
-          isLoaded ? "opacity-100" : "opacity-0"
-        )}
-        style={{ opacity: isLoaded ? opacity : 0 }}
-      >
-        {Array.isArray(src) ? (
-          src.map((source, index) => (
-            <source key={index} src={source.src} type={source.type} />
-          ))
-        ) : (
-          <source src={src} type="video/mp4" />
-        )}
-      </video>
+      {/* 3. Render video tag only when the user scrolls near the section, otherwise only render the static placeholder image */}
+      {isNearViewport ? (
+        <video
+          ref={videoRef}
+          autoPlay
+          muted
+          loop
+          playsInline
+          poster={poster}
+          onCanPlay={() => setIsLoaded(true)}
+          className={cn(
+            "h-full w-full object-cover transition-opacity duration-1000",
+            isLoaded ? "opacity-100" : "opacity-0"
+          )}
+          style={{ opacity: isLoaded ? opacity : 0 }}
+        >
+          {Array.isArray(src) ? (
+            src.map((source, index) => (
+              <source key={index} src={source.src} type={source.type} />
+            ))
+          ) : (
+            <source src={src} type="video/mp4" />
+          )}
+        </video>
+      ) : (
+        // Render background poster static image when offscreen before lazy load
+        poster && (
+          <div
+            className="h-full w-full bg-cover bg-center transition-opacity duration-1000"
+            style={{ backgroundImage: `url(${poster})`, opacity }}
+          />
+        )
+      )}
 
       {/* Overlay */}
       <div

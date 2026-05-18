@@ -8,8 +8,11 @@ export function Preloader() {
 
   useEffect(() => {
     const isMobile = window.innerWidth < 768;
-    const duration = isMobile ? 1800 : 3200;
-    const timer = window.setTimeout(() => setVisible(false), duration);
+    if (isMobile) {
+      setVisible(false);
+      return;
+    }
+    const timer = window.setTimeout(() => setVisible(false), 3200);
     return () => window.clearTimeout(timer);
   }, []);
 
@@ -17,7 +20,7 @@ export function Preloader() {
     <AnimatePresence>
       {visible && (
         <motion.div
-          className="fixed inset-0 z-[100] flex items-center justify-center overflow-hidden bg-white"
+          className="fixed inset-0 z-[100] hidden md:flex items-center justify-center overflow-hidden bg-white"
           initial={{ opacity: 1 }}
           exit={{ opacity: 0, scale: 1.05, filter: "blur(20px)", transition: { duration: 1, ease: [0.22, 1, 0.36, 1] } }}
         >

@@ -50,6 +50,12 @@ import { SectionReveal, StaggerContainer, StaggerItem } from "@/components/Secti
 import { VideoBackground } from "@/components/VideoBackground";
 import { useMotion } from "@/context/MotionContext";
 import { ServiceImageSlideshow } from "@/components/ServiceImageSlideshow";
+import dynamic from "next/dynamic";
+
+const InteractiveHero3D = dynamic(
+  () => import("./InteractiveHero3D").then((mod) => mod.InteractiveHero3D),
+  { ssr: false }
+);
 import {
   expandedServices,
   navLinks,
@@ -630,7 +636,7 @@ function SecuritySection() {
   const y = useTransform(scrollYProgress, [0, 1], isMobile ? [0, 0] : [-20, 20]);
 
   return (
-    <section ref={ref} className="relative overflow-visible bg-white">
+    <section ref={ref} className="relative overflow-hidden bg-white">
       {/* Curved Divider at Top */}
       <div className="absolute top-0 left-0 w-full overflow-hidden leading-[0] transform rotate-180 bg-white z-10">
         <svg className="relative block w-[calc(100%+1.3px)] h-[50px] fill-[#2563eb]" viewBox="0 0 1200 120" preserveAspectRatio="none">
@@ -1508,13 +1514,34 @@ function Footer() {
 export function HomePage() {
   const { isMotionEnabled } = useMotion();
 
+  useEffect(() => {
+    // Automatically play/pause all static video elements based on viewport visibility
+    const videos = document.querySelectorAll("video");
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          const video = entry.target as HTMLVideoElement;
+          if (entry.isIntersecting) {
+            video.play().catch(() => {});
+          } else {
+            video.pause();
+          }
+        });
+      },
+      { threshold: 0.05 }
+    );
+
+    videos.forEach((video) => observer.observe(video));
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <>
       <Preloader />
 
       <Header />
       <main className="pt-[110px] md:pt-[170px]">
-        <section className="relative overflow-visible pb-24 bg-white">
+        <section className="relative overflow-hidden pb-24 bg-white">
           {/* Hero Static Background */}
           <div className="absolute inset-0 bg-white -z-20" />
           <div className="absolute inset-0 grid-mask opacity-[0.05] -z-10" />
@@ -1600,10 +1627,41 @@ export function HomePage() {
         </section>
 
         <SectionReveal className="py-12">
-          <div className="container-x grid gap-4 md:grid-cols-4">
+          {/* Desktop Grid Layout */}
+          <div className="container-x hidden md:grid gap-4 md:grid-cols-4">
             {stats.map((stat, index) => (
               <StatCard key={stat.label} stat={stat} index={index} />
             ))}
+          </div>
+
+          {/* Mobile Endless Ticker Layout */}
+          <div className="md:hidden w-full overflow-hidden relative py-4 bg-white select-none pointer-events-none">
+            {/* Edge Fades for high-tech premium feel */}
+            <div className="absolute inset-y-0 left-0 w-12 bg-gradient-to-r from-white to-transparent z-10" />
+            <div className="absolute inset-y-0 right-0 w-12 bg-gradient-to-l from-white to-transparent z-10" />
+
+            <motion.div
+              className="flex gap-16 whitespace-nowrap pr-16"
+              animate={{ x: ["0%", "-50%"] }}
+              transition={{
+                ease: "linear",
+                duration: 16,
+                repeat: Infinity,
+              }}
+              style={{ width: "fit-content" }}
+            >
+              {/* Double items for infinite loop seamless connection */}
+              {[...stats, ...stats].map((stat, i) => (
+                <div key={i} className="inline-flex flex-col items-center justify-center min-w-[220px]">
+                  <p className="font-heading text-4xl font-black text-slate-900 tracking-tighter">
+                    {stat.value}{stat.suffix}
+                  </p>
+                  <p className="mt-2 text-[9px] font-bold uppercase tracking-[0.2em] text-slate-400">
+                    {stat.label}
+                  </p>
+                </div>
+              ))}
+            </motion.div>
           </div>
         </SectionReveal>
 
