@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef, useEffect, useState } from "react";
-import { cn } from "@/lib/utils";
+import { cn, getOptimizedImageUrl } from "@/lib/utils";
 import { Pause, Play } from "lucide-react";
 import { useMotion } from "@/context/MotionContext";
 
@@ -42,35 +42,41 @@ export function VideoBackground({
   const [isLoaded, setIsLoaded] = useState(false);
   const [isNearViewport, setIsNearViewport] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
+  const [isMobileDevice, setIsMobileDevice] = useState(true); // Default to true for SSR safety
 
   const togglePlay = (e: React.MouseEvent) => {
     e.stopPropagation();
     setIsPlaying(!isPlaying);
   };
 
-  // 1. Intersection Observer to detect when the video is close to viewport (lazy load) and actively visible (play/pause)
+  // 1. Intersection Observer and mobile detection
   useEffect(() => {
-    const container = containerRef.current;
-    if (!container) return;
+    const isTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+    const isSmallScreen = window.innerWidth < 768;
+    const mobileStatus = isTouch || isSmallScreen;
+    setIsMobileDevice(mobileStatus);
 
-    // Use a pre-load margin observer: trigger loading 300px before the video enters screen
+    const container = containerRef.current;
+    if (!container || mobileStatus) return;
+
+    // Trigger loading 300px before the video enters screen (desktop only)
     const loadObserver = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
           setIsNearViewport(true);
-          loadObserver.disconnect(); // Once we trigger loading, we don't need to check anymore
+          loadObserver.disconnect();
         }
       },
       { rootMargin: "300px" }
     );
     loadObserver.observe(container);
 
-    // Playback observer: check if the video is actively visible to play/pause
+    // Playback observer: check if the video is actively visible to play/pause (desktop only)
     const playbackObserver = new IntersectionObserver(
       ([entry]) => {
         setIsVisible(entry.isIntersecting);
       },
-      { threshold: 0.05 } // 5% visibility is enough to play
+      { threshold: 0.05 }
     );
     playbackObserver.observe(container);
 
@@ -80,20 +86,20 @@ export function VideoBackground({
     };
   }, []);
 
-  // 2. Play/Pause based on user play state, motion configuration, and viewport visibility
+  // 2. Play/Pause based on user play state, motion configuration, and viewport visibility (desktop only)
   useEffect(() => {
     const video = videoRef.current;
-    if (!video) return;
+    if (!video || isMobileDevice) return;
 
     if (isPlaying && isMotionEnabled && isVisible) {
       video.play().catch(() => setIsPlaying(false));
     } else {
       video.pause();
     }
-  }, [isPlaying, isMotionEnabled, isVisible]);
+  }, [isPlaying, isMotionEnabled, isVisible, isMobileDevice]);
 
   useEffect(() => {
-    if (parallaxSpeed === 0 || fixed) return;
+    if (parallaxSpeed === 0 || fixed || isMobileDevice) return;
 
     const handleScroll = () => {
       if (!containerRef.current || !videoRef.current) return;
@@ -105,7 +111,32 @@ export function VideoBackground({
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [parallaxSpeed, fixed]);
+  }, [parallaxSpeed, fixed, isMobileDevice]);
+
+  // Optimize background poster images dynamically
+  const optimizedPoster = poster ? getOptimizedImageUrl(poster, isMobileDevice ? 640 : 1200) : "";
+
+  // 3. Complete early bypass on mobile: render only the static image, skipping video DOM overhead entirely
+  if (isMobileDevice) {
+    return (
+      <div className={cn(
+        fixed ? "fixed" : "absolute",
+        "inset-0 overflow-hidden -z-20",
+        className
+      )}>
+        {optimizedPoster && (
+          <div
+            className="h-full w-full bg-cover bg-center transition-opacity duration-1000"
+            style={{ backgroundImage: `url(${optimizedPoster})`, opacity }}
+          />
+        )}
+        <div
+          className={cn("absolute inset-0 -z-10", overlayColor)}
+          style={{ opacity: overlayOpacity }}
+        />
+      </div>
+    );
+  }
 
   if (!src || (Array.isArray(src) && src.length === 0)) {
     return (
@@ -114,10 +145,10 @@ export function VideoBackground({
         "inset-0 overflow-hidden -z-20",
         className
       )}>
-        {poster && (
+        {optimizedPoster && (
           <div
             className="h-full w-full bg-cover bg-center transition-opacity duration-1000"
-            style={{ backgroundImage: `url(${poster})`, opacity }}
+            style={{ backgroundImage: `url(${optimizedPoster})`, opacity }}
           />
         )}
         <div
@@ -137,7 +168,6 @@ export function VideoBackground({
         className
       )}
     >
-      {/* 3. Render video tag only when the user scrolls near the section, otherwise only render the static placeholder image */}
       {isNearViewport ? (
         <video
           ref={videoRef}
@@ -145,7 +175,7 @@ export function VideoBackground({
           muted
           loop
           playsInline
-          poster={poster}
+          poster={optimizedPoster}
           onCanPlay={() => setIsLoaded(true)}
           className={cn(
             "h-full w-full object-cover transition-opacity duration-1000",
@@ -162,11 +192,10 @@ export function VideoBackground({
           )}
         </video>
       ) : (
-        // Render background poster static image when offscreen before lazy load
-        poster && (
+        optimizedPoster && (
           <div
             className="h-full w-full bg-cover bg-center transition-opacity duration-1000"
-            style={{ backgroundImage: `url(${poster})`, opacity }}
+            style={{ backgroundImage: `url(${optimizedPoster})`, opacity }}
           />
         )
       )}

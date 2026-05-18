@@ -233,63 +233,63 @@ export const projects: Project[] = [
 
 export const serviceSlideshowImages = [
   {
-    url: "/videos/slideshow/ss1.jpg",
+    url: "/videos/slideshow/ss1.webp",
     title: "Security Infrastructure",
     description: "Advanced surveillance and monitoring systems.",
     accent: "orange",
     sectionId: "service-security"
   },
   {
-    url: "/videos/slideshow/ss2.jpg",
+    url: "/videos/slideshow/ss2.webp",
     title: "IT Networking",
     description: "Scalable fiber and server deployments.",
     accent: "blue",
     sectionId: "service-it"
   },
   {
-    url: "/videos/slideshow/ss3.png",
+    url: "/videos/slideshow/ss3.webp",
     title: "Modern Workspaces",
     description: "Premium office and co-working environments.",
     accent: "blue",
     sectionId: "service-workspace"
   },
   {
-    url: "/videos/slideshow/ss4.jpg",
+    url: "/videos/slideshow/ss4.webp",
     title: "Civil Solutions",
     description: "Expert construction and turnkey interiors.",
     accent: "orange",
     sectionId: "service-civil"
   },
   {
-    url: "/videos/slideshow/ss5.jpg",
+    url: "/videos/slideshow/ss5.webp",
     title: "Project Execution",
     description: "On-site management and delivery.",
     accent: "blue",
     sectionId: "projects"
   },
   {
-    url: "/videos/slideshow/ss6.jpeg",
+    url: "/videos/slideshow/ss6.webp",
     title: "Technical Support",
     description: "24/7 infrastructure maintenance.",
     accent: "orange",
     sectionId: "contact"
   },
   {
-    url: "/videos/slideshow/ss7.jpeg",
+    url: "/videos/slideshow/ss7.webp",
     title: "Smart Solutions",
     description: "Future-ready business tech.",
     accent: "blue",
     sectionId: "service-it"
   },
   {
-    url: "/videos/slideshow/ss8.jpeg",
+    url: "/videos/slideshow/ss8.webp",
     title: "Site Inspection",
     description: "Detailed planning and audit.",
     accent: "orange",
     sectionId: "quotation"
   },
   {
-    url: "/videos/slideshow/ss9.jpg",
+    url: "/videos/slideshow/ss9.webp",
     title: "Final Delivery",
     description: "Quality assured infrastructure.",
     accent: "blue",

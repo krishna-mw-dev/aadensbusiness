@@ -67,7 +67,7 @@ import {
   testimonials,
   trustPoints
 } from "@/data/site";
-import { cn, whatsappUrl } from "@/lib/utils";
+import { cn, whatsappUrl, getOptimizedImageUrl } from "@/lib/utils";
 
 function useCounter(target: number) {
   const [count, setCount] = useState(0);
@@ -552,7 +552,7 @@ function ModelScrollShowcase() {
               className="absolute inset-x-4 md:inset-x-[-12vw] top-[42%] z-10 -translate-y-1/2"
             >
               <img
-                src="/videos/model.png"
+                src="/videos/model.webp"
                 alt="Ardens multi-service business model"
                 className="mx-auto w-full max-w-[90vw] md:w-[1240px] md:max-w-none select-none drop-shadow-2xl"
                 draggable={false}
@@ -668,7 +668,7 @@ function SecuritySection() {
             >
               <div className="absolute -inset-4 bg-blue-600/20 blur-3xl opacity-0 group-hover/security-img:opacity-100 transition-opacity duration-1000" />
               <img
-                src="/videos/samplecctv.jpeg"
+                src="/videos/samplecctv.webp"
                 alt="CCTV Surveillance"
                 className="h-full w-full object-cover rounded-[3rem] shadow-2xl border-4 border-white/10 relative z-10"
               />
@@ -798,6 +798,13 @@ function SecuritySection() {
 
 
 function Services() {
+  const [isMobile, setIsMobile] = useState(true);
+  useEffect(() => {
+    const isTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+    const isSmallScreen = window.innerWidth < 768;
+    setIsMobile(isTouch || isSmallScreen);
+  }, []);
+
   return (
     <section id="services" className="relative">
       {/* CCTV & Smart Security Section - Light Minimal */}
@@ -855,16 +862,24 @@ function Services() {
               className="relative group"
             >
               <div className="aspect-[4/3] rounded-[3rem] border border-slate-200 bg-white p-8 overflow-hidden shadow-2xl shadow-slate-200/50 relative z-10">
-                <video
-                  autoPlay
-                  muted
-                  loop
-                  playsInline
-                  poster="https://images.unsplash.com/photo-1557597774-9d273605dfa9?auto=format&fit=crop&w=1400&q=80"
-                  className="absolute inset-0 h-full w-full object-cover opacity-90 group-hover:scale-110 transition-transform duration-700"
-                >
-                  <source src="/videos/cctv-showcase.mp4" type="video/mp4" />
-                </video>
+                {isMobile ? (
+                  <img
+                    src={getOptimizedImageUrl("https://images.unsplash.com/photo-1557597774-9d273605dfa9?auto=format&fit=crop&w=1400&q=80", 640)}
+                    alt="Smart Surveillance Systems"
+                    className="absolute inset-0 h-full w-full object-cover opacity-90 group-hover:scale-110 transition-transform duration-700"
+                  />
+                ) : (
+                  <video
+                    autoPlay
+                    muted
+                    loop
+                    playsInline
+                    poster={getOptimizedImageUrl("https://images.unsplash.com/photo-1557597774-9d273605dfa9?auto=format&fit=crop&w=1400&q=80", 1200)}
+                    className="absolute inset-0 h-full w-full object-cover opacity-90 group-hover:scale-110 transition-transform duration-700"
+                  >
+                    <source src="/videos/cctv-showcase.mp4" type="video/mp4" />
+                  </video>
+                )}
                 <div className="absolute inset-0 bg-gradient-to-t from-white via-transparent to-transparent opacity-40" />
                 <div className="relative h-full flex flex-col justify-end">
                   <p className="text-[10px] font-black uppercase tracking-[0.4em] text-orange-600 mb-2">Operational 24/7</p>
@@ -897,16 +912,24 @@ function Services() {
               className="relative order-2 lg:order-1"
             >
               <div className="relative z-10 rounded-3xl overflow-hidden shadow-2xl shadow-slate-300/50 border-4 border-white aspect-[4/5]">
-                <video
-                  autoPlay
-                  muted
-                  loop
-                  playsInline
-                  poster="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=1200&q=80"
-                  className="w-full h-full object-cover"
-                >
-                  <source src="/videos/hero-bg.mp4" type="video/mp4" />
-                </video>
+                {isMobile ? (
+                  <img
+                    src={getOptimizedImageUrl("https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=1200&q=80", 640)}
+                    alt="Electricity and Servicing"
+                    className="w-full h-full object-cover"
+                  />
+                ) : (
+                  <video
+                    autoPlay
+                    muted
+                    loop
+                    playsInline
+                    poster={getOptimizedImageUrl("https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=1200&q=80", 1200)}
+                    className="w-full h-full object-cover"
+                  >
+                    <source src="/videos/hero-bg.mp4" type="video/mp4" />
+                  </video>
+                )}
                 <div className="absolute bottom-0 left-0 right-0 bg-blue-600 p-10 text-white">
                   <p className="text-4xl font-black">4938+</p>
                   <p className="text-sm font-bold uppercase tracking-widest opacity-80">Trusted Deployments</p>
@@ -994,16 +1017,24 @@ function Services() {
               viewport={{ once: true }}
               className="lg:col-span-2 aspect-video rounded-[3rem] overflow-hidden shadow-2xl shadow-slate-200/50 border border-slate-200 group/img relative"
             >
-              <video
-                autoPlay
-                muted
-                loop
-                playsInline
-                poster="https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1200&q=80"
-                className="w-full h-full object-cover group-hover/img:scale-105 transition-transform duration-1000"
-              >
-                <source src="/videos/coworking-showcase.mp4" type="video/mp4" />
-              </video>
+              {isMobile ? (
+                <img
+                  src={getOptimizedImageUrl("https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1200&q=80", 640)}
+                  alt="Co-working Space Showcase"
+                  className="w-full h-full object-cover group-hover/img:scale-105 transition-transform duration-1000"
+                />
+              ) : (
+                <video
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  poster={getOptimizedImageUrl("https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1200&q=80", 1200)}
+                  className="w-full h-full object-cover group-hover/img:scale-105 transition-transform duration-1000"
+                >
+                  <source src="/videos/coworking-showcase.mp4" type="video/mp4" />
+                </video>
+              )}
               <div className="absolute inset-0 bg-blue-600/5 opacity-0 group-hover/img:opacity-100 transition-opacity" />
             </motion.div>
             <motion.div
@@ -1124,16 +1155,24 @@ function Services() {
               className="relative"
             >
               <div className="relative z-10 rounded-[3rem] overflow-hidden border border-slate-200 shadow-2xl shadow-slate-300/50">
-                <video
-                  autoPlay
-                  muted
-                  loop
-                  playsInline
-                  poster="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1200&q=80"
-                  className="w-full aspect-[4/5] object-cover group-hover:scale-105 transition-transform duration-1000"
-                >
-                  <source src="/videos/civil-showcase.mp4" type="video/mp4" />
-                </video>
+                {isMobile ? (
+                  <img
+                    src={getOptimizedImageUrl("https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1200&q=80", 640)}
+                    alt="Civil & Interior Solutions"
+                    className="w-full aspect-[4/5] object-cover group-hover:scale-105 transition-transform duration-1000"
+                  />
+                ) : (
+                  <video
+                    autoPlay
+                    muted
+                    loop
+                    playsInline
+                    poster={getOptimizedImageUrl("https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1200&q=80", 1200)}
+                    className="w-full aspect-[4/5] object-cover group-hover:scale-105 transition-transform duration-1000"
+                  >
+                    <source src="/videos/civil-showcase.mp4" type="video/mp4" />
+                  </video>
+                )}
                 <div className="absolute inset-0 bg-gradient-to-t from-white via-transparent to-transparent opacity-40" />
                 <div className="absolute bottom-10 left-10 right-10 p-8 rounded-3xl bg-orange-600 text-white shadow-xl">
                   <p className="text-xs font-bold uppercase tracking-[0.3em] mb-2 text-white/80">Project Success</p>
@@ -1513,8 +1552,16 @@ function Footer() {
 
 export function HomePage() {
   const { isMotionEnabled } = useMotion();
+  const [isMobile, setIsMobile] = useState(true);
 
   useEffect(() => {
+    const isTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+    const isSmallScreen = window.innerWidth < 768;
+    const mobileStatus = isTouch || isSmallScreen;
+    setIsMobile(mobileStatus);
+
+    if (mobileStatus) return;
+
     // Automatically play/pause all static video elements based on viewport visibility
     const videos = document.querySelectorAll("video");
     const observer = new IntersectionObserver(
@@ -1692,10 +1739,10 @@ export function HomePage() {
                     className="project-card group overflow-hidden rounded-[2rem] md:rounded-[3rem] border border-slate-200 bg-white hover:border-blue-500/30 hover:shadow-2xl hover:shadow-slate-200/50 transition-all duration-500 relative"
                   >
                     <div className="relative h-64 md:h-96 overflow-hidden">
-                      <div className="absolute inset-0 bg-cover bg-center transition duration-1000 group-hover:scale-110 opacity-90" style={{ backgroundImage: `url(${project.after})` }} />
+                      <div className="absolute inset-0 bg-cover bg-center transition duration-1000 group-hover:scale-110 opacity-90" style={{ backgroundImage: `url(${getOptimizedImageUrl(project.after, isMobile ? 640 : 1200)})` }} />
 
                       {/* Project Video Hover Preview */}
-                      {project.video && isMotionEnabled && (
+                      {!isMobile && project.video && isMotionEnabled && (
                         <video
                           muted
                           loop
@@ -1711,7 +1758,7 @@ export function HomePage() {
                         </video>
                       )}
 
-                      <div className="project-before absolute inset-0 bg-cover bg-center z-20" style={{ backgroundImage: `url(${project.before})` }} />
+                      <div className="project-before absolute inset-0 bg-cover bg-center z-20" style={{ backgroundImage: `url(${getOptimizedImageUrl(project.before, isMobile ? 640 : 1200)})` }} />
                       <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent opacity-60 z-30" />
 
                       <div className="absolute left-8 top-8 rounded-full bg-white/90 px-5 py-2 text-[10px] font-black uppercase tracking-widest text-slate-900 backdrop-blur-md border border-white/20 z-40">

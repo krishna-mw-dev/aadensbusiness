@@ -53,7 +53,7 @@ export function Preloader() {
             transition={{ duration: 1.5, ease: [0.22, 1, 0.36, 1] }}
           >
             <img
-              src="/videos/preloader.png"
+              src="/videos/preloader.webp"
               alt="Ardens Infrastructure"
               className="h-full w-full object-cover"
             />
