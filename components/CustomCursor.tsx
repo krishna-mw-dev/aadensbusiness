@@ -4,6 +4,23 @@ import { useEffect, useState } from "react";
 import { motion, useSpring, useMotionValue } from "framer-motion";
 
 export function CustomCursor() {
+  const [isMobile, setIsMobile] = useState(true); // Default to true for SSR safety
+
+  useEffect(() => {
+    // Detect mobile or touch screen devices
+    const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+    const isSmallScreen = window.innerWidth < 768;
+    setIsMobile(isTouchDevice || isSmallScreen);
+  }, []);
+
+  // Completely return null and avoid running any expensive Framer Motion spring ticks on mobile
+  if (isMobile) return null;
+
+  return <ActualCursor />;
+}
+
+// Sub-component containing heavy spring physics and event listeners, only compiled/mounted on desktop mouse-based devices
+function ActualCursor() {
   const [isHovered, setIsHovered] = useState(false);
   const [isVideoHovered, setIsVideoHovered] = useState(false);
   const [isHidden, setIsHidden] = useState(true);
@@ -16,15 +33,6 @@ export function CustomCursor() {
   const cursorY = useSpring(mouseY, springConfig);
 
   useEffect(() => {
-    // Disable on touch devices or small screens
-    const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
-    const isMobile = window.innerWidth < 768;
-
-    if (isTouchDevice || isMobile) {
-      setIsHidden(true);
-      return;
-    }
-
     const moveCursor = (e: MouseEvent) => {
       mouseX.set(e.clientX);
       mouseY.set(e.clientY);
