@@ -549,12 +549,12 @@ function ModelScrollShowcase() {
           <div className="relative mx-auto min-h-[440px] max-w-6xl md:min-h-[540px] lg:min-h-[600px]">
             <motion.div
               style={{ scale: modelScale, y: modelY, x: modelX, rotate: modelRotate }}
-              className="absolute inset-x-[-28vw] top-[42%] z-10 -translate-y-1/2 lg:inset-x-[-12vw]"
+              className="absolute inset-x-4 md:inset-x-[-12vw] top-[42%] z-10 -translate-y-1/2"
             >
               <img
                 src="/videos/model.png"
                 alt="Ardens multi-service business model"
-                className="mx-auto w-[1240px] max-w-none select-none drop-shadow-2xl md:w-[1240px] w-[800px]"
+                className="mx-auto w-full max-w-[90vw] md:w-[1240px] md:max-w-none select-none drop-shadow-2xl"
                 draggable={false}
               />
             </motion.div>
