@@ -387,7 +387,7 @@ function HeroVisual() {
           onMouseEnter={() => setIsPaused(true)}
           onMouseLeave={() => setIsPaused(false)}
         >
-          <div className="relative aspect-[4/5] min-h-[520px] overflow-hidden bg-slate-900 md:aspect-[5/6]">
+          <div className="relative aspect-[4/5] md:min-h-[520px] overflow-hidden bg-slate-900 md:aspect-[5/6]">
             <AnimatePresence mode="wait">
               <motion.img
                 key={activeImage.url}
@@ -407,13 +407,6 @@ function HeroVisual() {
               className="absolute inset-x-0 top-1/2 h-32 bg-gradient-to-b from-transparent via-blue-400/10 to-transparent pointer-events-none"
               style={{ animation: "scan 8s infinite ease-in-out" }}
             />
-
-            <div className="absolute left-6 top-6 z-20 flex items-center gap-3 rounded-full bg-white/90 px-4 py-2 shadow-xl shadow-black/10 backdrop-blur-md">
-              <span className={cn("h-2.5 w-2.5 rounded-full", activeImage.accent === "orange" ? "bg-orange-500" : "bg-blue-500")} />
-              <span className="text-[10px] font-black uppercase tracking-[0.24em] text-slate-900">
-                Live Showcase
-              </span>
-            </div>
 
             <div className="absolute right-6 top-6 z-20 rounded-full bg-slate-950/50 px-3 py-2 text-[10px] font-black tracking-widest text-white backdrop-blur-md">
               {String(current + 1).padStart(2, "0")} / {String(images.length).padStart(2, "0")}
@@ -489,18 +482,6 @@ function HeroVisual() {
             />
           </div>
         </div>
-      </motion.div>
-
-      <motion.div
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        viewport={{ once: true }}
-        transition={{ delay: 2.8 }}
-        className="absolute top-10 right-10 z-20 hidden lg:flex flex-col gap-1 text-right pointer-events-none"
-      >
-        <p className="text-[7px] font-black text-blue-500 uppercase tracking-[0.4em]">Showcase.Gallery.v1</p>
-        <p className="text-[7px] font-bold text-slate-400 uppercase tracking-widest">Photos: <span className="text-green-500">{images.length} Active</span></p>
-        <div className="h-[1px] w-24 bg-gradient-to-l from-blue-500/30 to-transparent mt-1 ml-auto" />
       </motion.div>
 
       <div
@@ -1587,7 +1568,7 @@ export function HomePage() {
       <Preloader />
 
       <Header />
-      <main className="pt-[110px] md:pt-[170px]">
+      <main className="pt-[110px] md:pt-[170px] overflow-x-hidden">
         <section className="relative overflow-hidden pb-24 bg-white">
           {/* Hero Static Background */}
           <div className="absolute inset-0 bg-white -z-20" />
@@ -1603,26 +1584,13 @@ export function HomePage() {
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 1.4, ease: [0.16, 1, 0.3, 1] }}
             >
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.4, duration: 1, ease: [0.16, 1, 0.3, 1] }}
-                className="mb-6 inline-flex items-center gap-2 rounded-full border border-blue-500/10 bg-blue-500/5 px-4 py-2 text-[9px] font-bold uppercase tracking-[0.25em] text-blue-600"
-              >
-                <span className="relative flex h-2 w-2">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
-                </span>
-                Smart Infrastructure Solutions
-              </motion.div>
-
               <motion.h1
                 initial={{ opacity: 0, y: 30, filter: "blur(10px)" }}
                 animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
                 transition={{ delay: 0.2, duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
-                className="max-w-3xl font-heading text-3xl font-black leading-[1.05] text-slate-900 sm:text-4xl md:text-5xl lg:text-6xl tracking-tight"
+                className="max-w-3xl font-heading text-3xl font-black leading-[1.05] text-slate-900 sm:text-4xl md:text-5xl lg:text-6xl tracking-tight uppercase"
               >
-                Building <span className="text-gradient-blue italic">Modern</span> Business Infrastructure
+                Everything Your Business Needs. <span className="text-gradient-blue italic">Under One Roof.</span>
               </motion.h1>
 
               <motion.p
@@ -1631,7 +1599,7 @@ export function HomePage() {
                 transition={{ delay: 0.4, duration: 1, ease: [0.16, 1, 0.3, 1] }}
                 className="mt-6 max-w-xl text-base leading-relaxed text-slate-600 md:text-lg text-balance font-medium"
               >
-                From enterprise networking and CCTV infrastructure to civil construction and co-working spaces, Ardens delivers complete business solutions with speed and precision.
+                Why deal with multiple vendors when one trusted partner can manage it all? From construction and electrical work to CCTV installation, IT solutions, repairs, and coworking spaces — Ardens Business Solutions is your complete business setup partner.
               </motion.p>
 
               <motion.div
@@ -1648,23 +1616,55 @@ export function HomePage() {
                 </MagneticButton>
               </motion.div>
 
-              <StaggerContainer delay={1.4} className="mt-12 grid grid-cols-2 gap-4 md:grid-cols-4">
-                {trustPoints.map((point) => {
-                  const Icon = point.icon;
-                  return (
-                    <StaggerItem key={point.label}>
-                      <div className="rounded-2xl border border-slate-100 bg-white p-5 shadow-sm hover:border-blue-500/30 hover:shadow-xl hover:-translate-y-1 transition-all group">
-                        <Icon className="h-5 w-5 text-orange-500 group-hover:scale-110 transition-transform" />
-                        <p className="mt-4 text-xs font-bold text-slate-900 tracking-wide">{point.label}</p>
-                      </div>
-                    </StaggerItem>
-                  );
-                })}
-              </StaggerContainer>
+              {/* Highly creative comparison of Multi-Vendor Tension vs. Ardens' Peace of Mind */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.8, duration: 1, ease: [0.16, 1, 0.3, 1] }}
+                className="mt-12 rounded-[2rem] border border-slate-200/80 bg-slate-50/50 p-6 md:p-8 backdrop-blur-md relative overflow-hidden group shadow-lg"
+              >
+                <div className="absolute top-0 right-0 w-24 h-24 bg-blue-600/5 blur-2xl rounded-full" />
+                <div className="grid gap-6 sm:grid-cols-2">
+                  <div className="border-r border-slate-200/80 pr-4 sm:pr-6">
+                    <p className="text-[10px] font-black uppercase tracking-[0.2em] text-red-500 mb-3 flex items-center gap-1.5">
+                      <span className="h-1.5 w-1.5 rounded-full bg-red-500 animate-pulse" />
+                      The Tension (Multi-Vendor)
+                    </p>
+                    <div className="space-y-2">
+                      <p className="text-xs font-bold text-slate-600 flex items-center gap-2">
+                        <span className="text-red-500">✕</span> Chasing electricians, plumbers & masons
+                      </p>
+                      <p className="text-xs font-bold text-slate-600 flex items-center gap-2">
+                        <span className="text-red-500">✕</span> CCTV, network setup, and repair mismatch
+                      </p>
+                      <p className="text-xs font-bold text-slate-600 flex items-center gap-2">
+                        <span className="text-red-500">✕</span> Multi-vendor coordination headaches
+                      </p>
+                    </div>
+                  </div>
+                  <div className="pl-0 sm:pl-4">
+                    <p className="text-[10px] font-black uppercase tracking-[0.2em] text-green-600 mb-3 flex items-center gap-1.5">
+                      <span className="h-1.5 w-1.5 rounded-full bg-green-500 animate-pulse" />
+                      The Peace (Ardens' Way)
+                    </p>
+                    <div className="space-y-2">
+                      <p className="text-xs font-bold text-slate-900 flex items-center gap-2">
+                        <span className="text-green-500">✓</span> Single accountable team managing it all
+                      </p>
+                      <p className="text-xs font-bold text-slate-900 flex items-center gap-2">
+                        <span className="text-green-500">✓</span> Smooth, worry-free construction & IT setups
+                      </p>
+                      <p className="text-xs font-bold text-slate-900 flex items-center gap-2">
+                        <span className="text-green-500">✓</span> Complete peace of mind for your business
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
             </motion.div>
 
             <motion.div
-              initial={{ opacity: 0, scale: 0.85, x: 50 }}
+              initial={{ opacity: 0, scale: 0.85, x: isMobile ? 0 : 50 }}
               animate={{ opacity: 1, scale: 1, x: 0 }}
               transition={{ duration: 1.6, ease: [0.16, 1, 0.3, 1], delay: 0.3 }}
             >
