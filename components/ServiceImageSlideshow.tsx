@@ -10,6 +10,7 @@ export function ServiceImageSlideshow() {
   const [current, setCurrent] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
   const [progress, setProgress] = useState(0);
+  const [isInView, setIsInView] = useState(true);
   const containerRef = useRef<HTMLElement>(null);
 
   const images = serviceSlideshowImages;
@@ -23,7 +24,22 @@ export function ServiceImageSlideshow() {
   const flareLeft = useTransform(scrollYProgress, [0, 1], ["-10%", "60%"]);
 
   useEffect(() => {
-    if (isHovered) {
+    const element = containerRef.current;
+    if (!element) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsInView(entry.isIntersecting);
+      },
+      { threshold: 0.05 }
+    );
+    observer.observe(element);
+
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (isHovered || !isInView) {
       setProgress(0);
       return;
     }
@@ -43,7 +59,7 @@ export function ServiceImageSlideshow() {
     }, interval);
 
     return () => clearInterval(timer);
-  }, [isHovered, current]);
+  }, [isHovered, current, isInView]);
 
   const next = () => {
     setCurrent((prev) => (prev + 1) % images.length);

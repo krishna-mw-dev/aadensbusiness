@@ -339,17 +339,33 @@ function HeroVisual() {
   const images = serviceSlideshowImages;
   const [current, setCurrent] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
+  const [isInView, setIsInView] = useState(true);
   const activeImage = images[current];
 
   useEffect(() => {
-    if (isPaused) return;
+    const element = ref.current;
+    if (!element) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsInView(entry.isIntersecting);
+      },
+      { threshold: 0.05 }
+    );
+    observer.observe(element);
+
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (isPaused || !isInView) return;
 
     const timer = window.setInterval(() => {
       setCurrent((value) => (value + 1) % images.length);
     }, 5200);
 
     return () => window.clearInterval(timer);
-  }, [images.length, isPaused]);
+  }, [images.length, isPaused, isInView]);
 
   const goTo = (index: number) => setCurrent((index + images.length) % images.length);
   const next = () => goTo(current + 1);
@@ -1541,9 +1557,7 @@ export function HomePage() {
     const mobileStatus = isTouch || isSmallScreen;
     setIsMobile(mobileStatus);
 
-    if (mobileStatus) return;
-
-    // Automatically play/pause all static video elements based on viewport visibility
+    // Automatically play/pause all static video elements based on viewport visibility on all devices
     const videos = document.querySelectorAll("video");
     const observer = new IntersectionObserver(
       (entries) => {
