@@ -40,7 +40,6 @@ export function VideoBackground({
   const containerRef = useRef<HTMLDivElement>(null);
   const [isPlaying, setIsPlaying] = useState(true);
   const [isLoaded, setIsLoaded] = useState(false);
-  const [isNearViewport, setIsNearViewport] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
   const [isMobileDevice, setIsMobileDevice] = useState(true); // Default to true for SSR safety
 
@@ -59,30 +58,17 @@ export function VideoBackground({
     const container = containerRef.current;
     if (!container) return;
 
-    // Trigger loading 300px before the video enters screen
-    const loadObserver = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsNearViewport(true);
-          loadObserver.disconnect();
-        }
-      },
-      { rootMargin: "300px" }
-    );
-    loadObserver.observe(container);
-
-    // Playback observer: check if the video is actively visible to play/pause
-    const playbackObserver = new IntersectionObserver(
+    // Active viewport observer (with 150px buffer margin to mount/unmount dynamically)
+    const observer = new IntersectionObserver(
       ([entry]) => {
         setIsVisible(entry.isIntersecting);
       },
-      { threshold: 0.05 }
+      { rootMargin: "150px 0px 150px 0px" }
     );
-    playbackObserver.observe(container);
+    observer.observe(container);
 
     return () => {
-      loadObserver.disconnect();
-      playbackObserver.disconnect();
+      observer.disconnect();
     };
   }, []);
 
@@ -96,7 +82,7 @@ export function VideoBackground({
     } else {
       video.pause();
     }
-  }, [isPlaying, isMotionEnabled, isVisible]);
+  }, [isPlaying, isMotionEnabled, isVisible, isLoaded]);
 
   useEffect(() => {
     if (parallaxSpeed === 0 || fixed || isMobileDevice) return;
@@ -146,7 +132,7 @@ export function VideoBackground({
         className
       )}
     >
-      {isNearViewport ? (
+      {isVisible ? (
         <video
           ref={videoRef}
           autoPlay
