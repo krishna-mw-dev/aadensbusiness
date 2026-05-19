@@ -540,15 +540,15 @@ function ModelScrollShowcase() {
   // Mobile layout: Fit the screen, remove side nodes, remove extra space
   if (isMobile) {
     return (
-      <section id="model-scroll" className="relative py-8 overflow-hidden border-y border-slate-100 bg-white">
+      <section id="model-scroll" className="relative pt-16 pb-8 overflow-hidden border-y border-slate-100 bg-white">
         <div className="absolute inset-0 grid-mask opacity-[0.07] pointer-events-none" />
         <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-blue-500/30 to-transparent" />
         <div className="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-orange-500/30 to-transparent" />
 
-        <div className="w-full relative z-10 flex flex-col items-center justify-center overflow-hidden">
+        <div className="w-full relative z-10 flex flex-col items-center justify-center">
           <motion.div
-            initial={{ opacity: 0, scale: 1.05 }}
-            whileInView={{ opacity: 1, scale: 1.25 }}
+            initial={{ opacity: 0, scale: 0.98 }}
+            whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
             className="w-full flex justify-center"
@@ -556,7 +556,7 @@ function ModelScrollShowcase() {
             <img
               src="/videos/model.webp"
               alt="Ardens multi-service business model"
-              className="w-full h-auto max-w-[94vw] select-none drop-shadow-2xl"
+              className="w-[108vw] max-w-none h-auto select-none drop-shadow-2xl mt-4"
               draggable={false}
             />
           </motion.div>
