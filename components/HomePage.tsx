@@ -862,24 +862,16 @@ function Services() {
               className="relative group"
             >
               <div className="aspect-[4/3] rounded-[3rem] border border-slate-200 bg-white p-8 overflow-hidden shadow-2xl shadow-slate-200/50 relative z-10">
-                {isMobile ? (
-                  <img
-                    src={getOptimizedImageUrl("https://images.unsplash.com/photo-1557597774-9d273605dfa9?auto=format&fit=crop&w=1400&q=80", 640)}
-                    alt="Smart Surveillance Systems"
-                    className="absolute inset-0 h-full w-full object-cover opacity-90 group-hover:scale-110 transition-transform duration-700"
-                  />
-                ) : (
-                  <video
-                    autoPlay
-                    muted
-                    loop
-                    playsInline
-                    poster={getOptimizedImageUrl("https://images.unsplash.com/photo-1557597774-9d273605dfa9?auto=format&fit=crop&w=1400&q=80", 1200)}
-                    className="absolute inset-0 h-full w-full object-cover opacity-90 group-hover:scale-110 transition-transform duration-700"
-                  >
-                    <source src="/videos/cctv-showcase.mp4" type="video/mp4" />
-                  </video>
-                )}
+                <video
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  poster={getOptimizedImageUrl("https://images.unsplash.com/photo-1557597774-9d273605dfa9?auto=format&fit=crop&w=1400&q=80", isMobile ? 640 : 1200)}
+                  className="absolute inset-0 h-full w-full object-cover opacity-90 group-hover:scale-110 transition-transform duration-700"
+                >
+                  <source src="/videos/cctv-showcase.mp4" type="video/mp4" />
+                </video>
                 <div className="absolute inset-0 bg-gradient-to-t from-white via-transparent to-transparent opacity-40" />
                 <div className="relative h-full flex flex-col justify-end">
                   <p className="text-[10px] font-black uppercase tracking-[0.4em] text-orange-600 mb-2">Operational 24/7</p>
@@ -912,24 +904,16 @@ function Services() {
               className="relative order-2 lg:order-1"
             >
               <div className="relative z-10 rounded-3xl overflow-hidden shadow-2xl shadow-slate-300/50 border-4 border-white aspect-[4/5]">
-                {isMobile ? (
-                  <img
-                    src={getOptimizedImageUrl("https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=1200&q=80", 640)}
-                    alt="Electricity and Servicing"
-                    className="w-full h-full object-cover"
-                  />
-                ) : (
-                  <video
-                    autoPlay
-                    muted
-                    loop
-                    playsInline
-                    poster={getOptimizedImageUrl("https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=1200&q=80", 1200)}
-                    className="w-full h-full object-cover"
-                  >
-                    <source src="/videos/hero-bg.mp4" type="video/mp4" />
-                  </video>
-                )}
+                <video
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  poster={getOptimizedImageUrl("https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=1200&q=80", isMobile ? 640 : 1200)}
+                  className="w-full h-full object-cover"
+                >
+                  <source src="/videos/hero-bg.mp4" type="video/mp4" />
+                </video>
                 <div className="absolute bottom-0 left-0 right-0 bg-blue-600 p-10 text-white">
                   <p className="text-4xl font-black">4938+</p>
                   <p className="text-sm font-bold uppercase tracking-widest opacity-80">Trusted Deployments</p>
@@ -1017,24 +1001,16 @@ function Services() {
               viewport={{ once: true }}
               className="lg:col-span-2 aspect-video rounded-[3rem] overflow-hidden shadow-2xl shadow-slate-200/50 border border-slate-200 group/img relative"
             >
-              {isMobile ? (
-                <img
-                  src={getOptimizedImageUrl("https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1200&q=80", 640)}
-                  alt="Co-working Space Showcase"
-                  className="w-full h-full object-cover group-hover/img:scale-105 transition-transform duration-1000"
-                />
-              ) : (
-                <video
-                  autoPlay
-                  muted
-                  loop
-                  playsInline
-                  poster={getOptimizedImageUrl("https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1200&q=80", 1200)}
-                  className="w-full h-full object-cover group-hover/img:scale-105 transition-transform duration-1000"
-                >
-                  <source src="/videos/coworking-showcase.mp4" type="video/mp4" />
-                </video>
-              )}
+              <video
+                autoPlay
+                muted
+                loop
+                playsInline
+                poster={getOptimizedImageUrl("https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1200&q=80", isMobile ? 640 : 1200)}
+                className="w-full h-full object-cover group-hover/img:scale-105 transition-transform duration-1000"
+              >
+                <source src="/videos/coworking-showcase.mp4" type="video/mp4" />
+              </video>
               <div className="absolute inset-0 bg-blue-600/5 opacity-0 group-hover/img:opacity-100 transition-opacity" />
             </motion.div>
             <motion.div
@@ -1155,24 +1131,16 @@ function Services() {
               className="relative"
             >
               <div className="relative z-10 rounded-[3rem] overflow-hidden border border-slate-200 shadow-2xl shadow-slate-300/50">
-                {isMobile ? (
-                  <img
-                    src={getOptimizedImageUrl("https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1200&q=80", 640)}
-                    alt="Civil & Interior Solutions"
-                    className="w-full aspect-[4/5] object-cover group-hover:scale-105 transition-transform duration-1000"
-                  />
-                ) : (
-                  <video
-                    autoPlay
-                    muted
-                    loop
-                    playsInline
-                    poster={getOptimizedImageUrl("https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1200&q=80", 1200)}
-                    className="w-full aspect-[4/5] object-cover group-hover:scale-105 transition-transform duration-1000"
-                  >
-                    <source src="/videos/civil-showcase.mp4" type="video/mp4" />
-                  </video>
-                )}
+                <video
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  poster={getOptimizedImageUrl("https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1200&q=80", isMobile ? 640 : 1200)}
+                  className="w-full aspect-[4/5] object-cover group-hover:scale-105 transition-transform duration-1000"
+                >
+                  <source src="/videos/civil-showcase.mp4" type="video/mp4" />
+                </video>
                 <div className="absolute inset-0 bg-gradient-to-t from-white via-transparent to-transparent opacity-40" />
                 <div className="absolute bottom-10 left-10 right-10 p-8 rounded-3xl bg-orange-600 text-white shadow-xl">
                   <p className="text-xs font-bold uppercase tracking-[0.3em] mb-2 text-white/80">Project Success</p>

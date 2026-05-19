@@ -57,9 +57,9 @@ export function VideoBackground({
     setIsMobileDevice(mobileStatus);
 
     const container = containerRef.current;
-    if (!container || mobileStatus) return;
+    if (!container) return;
 
-    // Trigger loading 300px before the video enters screen (desktop only)
+    // Trigger loading 300px before the video enters screen
     const loadObserver = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -71,7 +71,7 @@ export function VideoBackground({
     );
     loadObserver.observe(container);
 
-    // Playback observer: check if the video is actively visible to play/pause (desktop only)
+    // Playback observer: check if the video is actively visible to play/pause
     const playbackObserver = new IntersectionObserver(
       ([entry]) => {
         setIsVisible(entry.isIntersecting);
@@ -86,17 +86,17 @@ export function VideoBackground({
     };
   }, []);
 
-  // 2. Play/Pause based on user play state, motion configuration, and viewport visibility (desktop only)
+  // 2. Play/Pause based on user play state, motion configuration, and viewport visibility
   useEffect(() => {
     const video = videoRef.current;
-    if (!video || isMobileDevice) return;
+    if (!video) return;
 
     if (isPlaying && isMotionEnabled && isVisible) {
       video.play().catch(() => setIsPlaying(false));
     } else {
       video.pause();
     }
-  }, [isPlaying, isMotionEnabled, isVisible, isMobileDevice]);
+  }, [isPlaying, isMotionEnabled, isVisible]);
 
   useEffect(() => {
     if (parallaxSpeed === 0 || fixed || isMobileDevice) return;
@@ -115,28 +115,6 @@ export function VideoBackground({
 
   // Optimize background poster images dynamically
   const optimizedPoster = poster ? getOptimizedImageUrl(poster, isMobileDevice ? 640 : 1200) : "";
-
-  // 3. Complete early bypass on mobile: render only the static image, skipping video DOM overhead entirely
-  if (isMobileDevice) {
-    return (
-      <div className={cn(
-        fixed ? "fixed" : "absolute",
-        "inset-0 overflow-hidden -z-20",
-        className
-      )}>
-        {optimizedPoster && (
-          <div
-            className="h-full w-full bg-cover bg-center transition-opacity duration-1000"
-            style={{ backgroundImage: `url(${optimizedPoster})`, opacity }}
-          />
-        )}
-        <div
-          className={cn("absolute inset-0 -z-10", overlayColor)}
-          style={{ opacity: overlayOpacity }}
-        />
-      </div>
-    );
-  }
 
   if (!src || (Array.isArray(src) && src.length === 0)) {
     return (
