@@ -512,90 +512,27 @@ function HeroVisual() {
 }
 
 function ModelScrollShowcase() {
-  const ref = useRef<HTMLElement | null>(null);
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    setIsMobile(window.innerWidth < 768);
-  }, []);
-
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start end", "end start"]
-  });
-
-  const modelScale = useTransform(scrollYProgress, [0, 0.18, 0.55, 0.82, 1], isMobile ? [0.9, 1, 1.05, 1, 0.95] : [0.78, 1, 1.1, 0.96, 0.82]);
-  const modelY = useTransform(scrollYProgress, [0, 0.25, 0.72, 1], isMobile ? [0, -10, -20, -40] : [18, -38, -72, -150]);
-  const modelX = useTransform(scrollYProgress, [0, 0.45, 1], isMobile ? ["0%", "0%", "0%"] : ["-4%", "0%", "5%"]);
-  const modelRotate = useTransform(scrollYProgress, [0, 0.22, 0.54, 0.82, 1], isMobile ? [0, 0, 0, 0, 0] : [-7, -1, 3, -2, 5]);
-  const scanX = useTransform(scrollYProgress, [0, 1], ["-120%", "120%"]);
-  const securityOpacity = useTransform(scrollYProgress, [0.05, 0.16, 0.33, 0.44], [0, 1, 1, 0]);
-  const workspaceOpacity = useTransform(scrollYProgress, [0.24, 0.34, 0.52, 0.64], [0, 1, 1, 0]);
-  const networkOpacity = useTransform(scrollYProgress, [0.46, 0.56, 0.74, 0.86], [0, 1, 1, 0]);
-  const deliveryOpacity = useTransform(scrollYProgress, [0.68, 0.78, 0.96, 1], [0, 1, 1, 0]);
-
   return (
-    <section ref={ref} id="model-scroll" className="relative min-h-[120vh] md:min-h-[170vh] overflow-clip border-y border-slate-100 bg-white">
-      <div className="sticky top-0 flex min-h-screen items-start overflow-hidden py-8 md:py-12">
-        <div className="absolute inset-0 grid-mask opacity-[0.07]" />
-        <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-blue-500/30 to-transparent" />
-        <div className="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-orange-500/30 to-transparent" />
+    <section id="model-scroll" className="relative py-8 md:py-16 overflow-hidden border-y border-slate-100 bg-white">
+      <div className="absolute inset-0 grid-mask opacity-[0.07] pointer-events-none" />
+      <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-blue-500/30 to-transparent" />
+      <div className="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-orange-500/30 to-transparent" />
+
+      <div className="container-x relative z-10 flex flex-col items-center justify-center">
         <motion.div
-          style={{ x: scanX }}
-          className="absolute inset-y-0 w-1/3 bg-gradient-to-r from-transparent via-blue-500/[0.08] to-transparent"
-        />
-
-        <div className="container-x relative z-10">
-          <div className="relative mx-auto min-h-[440px] max-w-6xl md:min-h-[540px] lg:min-h-[600px]">
-            <motion.div
-              style={{ scale: modelScale, y: modelY, x: modelX, rotate: modelRotate }}
-              className="absolute inset-x-4 md:inset-x-[-12vw] top-[42%] z-10 -translate-y-1/2"
-            >
-              <img
-                src="/videos/model.webp"
-                alt="Ardens multi-service business model"
-                className="mx-auto w-full max-w-[90vw] md:w-[1240px] md:max-w-none select-none drop-shadow-2xl"
-                draggable={false}
-              />
-            </motion.div>
-
-            <motion.div
-              style={{ opacity: securityOpacity }}
-              className="absolute left-0 top-6 z-20 max-w-[180px] md:max-w-[260px] rounded-2xl border border-orange-500/15 bg-white/90 p-3 md:p-5 shadow-xl shadow-orange-500/10 backdrop-blur-md"
-            >
-              <ShieldCheck className="h-5 w-5 md:h-6 md:h-6 text-orange-500" />
-              <h3 className="mt-2 md:mt-4 font-heading text-sm md:text-lg font-black text-slate-950">Security First</h3>
-              <p className="mt-1 md:mt-2 text-[10px] md:text-xs font-semibold leading-relaxed text-slate-500">CCTV, monitoring, access control, and clean coverage planning.</p>
-            </motion.div>
-
-            <motion.div
-              style={{ opacity: workspaceOpacity }}
-              className="absolute right-0 top-12 z-20 max-w-[180px] md:max-w-[260px] rounded-2xl border border-blue-500/15 bg-white/90 p-3 md:p-5 shadow-xl shadow-blue-500/10 backdrop-blur-md"
-            >
-              <Sofa className="h-5 w-5 md:h-6 md:h-6 text-blue-600" />
-              <h3 className="mt-2 md:mt-4 font-heading text-sm md:text-lg font-black text-slate-900 uppercase tracking-tighter text-slate-950">Workspace Ready</h3>
-              <p className="mt-1 md:mt-2 text-[10px] md:text-xs font-semibold leading-relaxed text-slate-500">Interiors, co-working spaces, smart rooms, and brand-ready setups.</p>
-            </motion.div>
-
-            <motion.div
-              style={{ opacity: networkOpacity }}
-              className="absolute bottom-28 left-4 z-20 max-w-[180px] md:max-w-[260px] rounded-2xl border border-blue-500/15 bg-white/90 p-3 md:p-5 shadow-xl shadow-blue-500/10 backdrop-blur-md"
-            >
-              <Router className="h-5 w-5 md:h-6 md:h-6 text-blue-600" />
-              <h3 className="mt-2 md:mt-4 font-heading text-sm md:text-lg font-black text-slate-950 uppercase tracking-tight text-slate-950">Connected Backbone</h3>
-              <p className="mt-1 md:mt-2 text-[10px] md:text-xs font-semibold leading-relaxed text-slate-500">Fiber, LAN, server racks, and power coordination for daily work.</p>
-            </motion.div>
-
-            <motion.div
-              style={{ opacity: deliveryOpacity }}
-              className="absolute bottom-14 right-3 z-20 max-w-[180px] md:max-w-[260px] rounded-2xl border border-orange-500/15 bg-white/90 p-3 md:p-5 shadow-xl shadow-orange-500/10 backdrop-blur-md"
-            >
-              <Building2 className="h-5 w-5 md:h-6 md:h-6 text-orange-500" />
-              <h3 className="mt-2 md:mt-4 font-heading text-sm md:text-lg font-black text-slate-950">Built To Deliver</h3>
-              <p className="mt-1 md:mt-2 text-[10px] md:text-xs font-semibold leading-relaxed text-slate-500">Civil construction, electrical repair, maintenance, and site execution.</p>
-            </motion.div>
-          </div>
-        </div>
+          initial={{ opacity: 0, scale: 0.95 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+          className="w-full flex justify-center"
+        >
+          <img
+            src="/videos/model.webp"
+            alt="Ardens multi-service business model"
+            className="w-full h-auto max-w-[90vw] md:max-w-4xl select-none drop-shadow-2xl"
+            draggable={false}
+          />
+        </motion.div>
       </div>
     </section>
   );
