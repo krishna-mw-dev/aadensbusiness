@@ -54,7 +54,7 @@ export default function Page() {
   return (
     <>
       <Script
-        id="ardens-local-business-schema"
+        id="aadens-local-business-schema"
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }}
       />

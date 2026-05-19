@@ -3,7 +3,7 @@ export function cn(...classes: Array<string | false | null | undefined>) {
 }
 
 export function whatsappUrl(message: string) {
-  return `https://wa.me/919876543210?text=${encodeURIComponent(message)}`;
+  return `https://wa.me/918077915694?text=${encodeURIComponent(message)}`;
 }
 
 export function getOptimizedImageUrl(url: string, width = 600) {

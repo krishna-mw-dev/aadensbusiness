@@ -11,7 +11,7 @@ export const metadata: Metadata = {
     "Office interior services in Dehradun including renovation, workstation setup, lighting, electrical coordination, meeting rooms, and turnkey execution.",
   alternates: { canonical: "/services/office-interior-services-dehradun" },
   openGraph: {
-    title: "Office Interior Services in Dehradun | Ardens Business Solutions",
+    title: "Office Interior Services in Dehradun | Aaden's Business Solutions",
     description: page.description,
     images: [{ url: page.image, width: 1200, height: 630, alt: page.title }]
   }

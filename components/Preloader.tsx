@@ -54,7 +54,7 @@ export function Preloader() {
           >
             <img
               src="/videos/preloader.webp"
-              alt="Ardens Infrastructure"
+              alt="Aaden's Infrastructure"
               className="h-full w-full object-cover"
             />
             <div className="absolute inset-0 bg-white/10" />
@@ -73,7 +73,7 @@ export function Preloader() {
                   Initializing Systems
                 </motion.p>
                 <p className="text-[8px] font-bold uppercase tracking-[0.2em] text-slate-400">
-                  Ardens Business Infrastructure v1.0
+                  Aaden's Business Infrastructure v1.0
                 </p>
               </div>
 

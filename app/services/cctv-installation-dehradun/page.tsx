@@ -11,7 +11,7 @@ export const metadata: Metadata = {
     "Premium CCTV installation in Dehradun for offices, cafes, coaching institutes, retail stores, warehouses, and commercial buildings. Get site inspection and clean installation support.",
   alternates: { canonical: "/services/cctv-installation-dehradun" },
   openGraph: {
-    title: "CCTV Installation in Dehradun | Ardens Business Solutions",
+    title: "CCTV Installation in Dehradun | Aaden's Business Solutions",
     description: page.description,
     images: [{ url: page.image, width: 1200, height: 630, alt: page.title }]
   }

@@ -11,7 +11,7 @@ export const metadata: Metadata = {
     "Fiber networking in Dehradun for offices and commercial buildings: fiber laying, LAN cabling, rack termination, switches, testing, and support.",
   alternates: { canonical: "/services/fiber-networking-dehradun" },
   openGraph: {
-    title: "Fiber Networking in Dehradun | Ardens Business Solutions",
+    title: "Fiber Networking in Dehradun | Aaden's Business Solutions",
     description: page.description,
     images: [{ url: page.image, width: 1200, height: 630, alt: page.title }]
   }

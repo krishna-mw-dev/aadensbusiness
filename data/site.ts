@@ -38,15 +38,15 @@ export interface Service {
 }
 
 export const siteConfig = {
-  name: "Ardens Business Solutions",
-  shortName: "Ardens",
-  url: "https://ardensbusiness.com",
-  phone: "+91 98765 43210",
-  whatsapp: "919876543210",
-  email: "hello@ardensbusiness.com",
+  name: "Aaden's Business Solutions",
+  shortName: "Aaden's",
+  url: "https://aadensbusiness.com",
+  phone: "+91 8077915694",
+  whatsapp: "918077915694",
+  email: "hello@aadensbusiness.com",
   address: "Dehradun, Uttarakhand, India",
   hours: "Mon-Sat, 9:30 AM-7:30 PM",
-  mapsUrl: "https://www.google.com/maps/search/?api=1&query=Ardens+Business+Solutions+Dehradun"
+  mapsUrl: "https://www.google.com/maps/search/?api=1&query=Aadens+Business+Solutions+Dehradun"
 };
 
 export const navLinks = [
@@ -311,7 +311,7 @@ export const testimonials = [
     role: "Director, EduAxis Coaching",
     area: "Dharampur",
     quote:
-      "Ardens handled our CCTV, network cabling, and classroom electrical work before admissions week. The team was fast, neat, and easy to coordinate with.",
+      "Aaden's handled our CCTV, network cabling, and classroom electrical work before admissions week. The team was fast, neat, and easy to coordinate with.",
     rating: 5
   },
   {

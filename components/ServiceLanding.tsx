@@ -84,7 +84,7 @@ export function ServiceLanding({ page }: ServiceLandingProps) {
                 {page.description}
               </p>
               <div className="mt-10 flex flex-col gap-4 sm:flex-row sm:items-center">
-                <MagneticButton href={whatsappUrl(`Hi Ardens, I need ${page.title}. Please share details.`)} className="min-w-[240px]" variant={accentColor}>
+                <MagneticButton href={whatsappUrl(`Hi Aaden's, I need ${page.title}. Please share details.`)} className="min-w-[240px]" variant={accentColor}>
                   Get Free Consultation
                 </MagneticButton>
                 <MagneticButton href={`tel:${siteConfig.phone}`} variant="secondary" className="min-w-[180px] border-slate-200 bg-white text-slate-600 hover:bg-slate-50">
@@ -171,7 +171,7 @@ export function ServiceLanding({ page }: ServiceLandingProps) {
                   Premium execution with site planning.
                 </h2>
                 <p className="mt-8 text-lg leading-relaxed text-slate-600">
-                  Ardens combines site inspection, quotation clarity, material planning, and post-project support so business owners can avoid scattered vendor management.
+                  Aaden's combines site inspection, quotation clarity, material planning, and post-project support so business owners can avoid scattered vendor management.
                 </p>
 
                 <div className="mt-12 space-y-6">
@@ -232,11 +232,11 @@ export function ServiceLanding({ page }: ServiceLandingProps) {
               </p>
             </div>
             <div className="flex flex-col sm:flex-row gap-4">
-              <MagneticButton href={whatsappUrl(`Hi Ardens, I want to book a consultation for ${page.title}.`)} variant={accentColor}>
+              <MagneticButton href={whatsappUrl(`Hi Aaden's, I want to book a consultation for ${page.title}.`)} variant={accentColor}>
                 Book Consultation
               </MagneticButton>
               <MagneticButton href={`tel:${siteConfig.phone}`} variant="secondary" className="border-slate-200 bg-white text-slate-600 hover:bg-slate-50">
-                Call Ardens
+                Call Aaden's
               </MagneticButton>
             </div>
           </div>

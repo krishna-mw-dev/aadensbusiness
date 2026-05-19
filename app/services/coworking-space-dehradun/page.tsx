@@ -11,7 +11,7 @@ export const metadata: Metadata = {
     "Modern co-working space in Dehradun with dedicated desks, meeting room, high-speed internet, power backup, and flexible plans for teams and founders.",
   alternates: { canonical: "/services/coworking-space-dehradun" },
   openGraph: {
-    title: "Co-working Space in Dehradun | Ardens Business Solutions",
+    title: "Co-working Space in Dehradun | Aaden's Business Solutions",
     description: page.description,
     images: [{ url: page.image, width: 1200, height: 630, alt: page.title }]
   }

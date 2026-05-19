@@ -22,6 +22,7 @@ import {
   Lock,
   MapPin,
   Menu,
+  MessageCircle,
   PanelsTopLeft,
   PhoneCall,
   PlugZap,
@@ -138,7 +139,7 @@ function Header() {
                   <ShieldCheck className="h-7 w-7 text-white" />
                 </div>
                 <div className="flex flex-col">
-                  <p className="font-heading text-lg font-black uppercase tracking-widest leading-none">Ardens</p>
+                  <p className="font-heading text-lg font-black uppercase tracking-widest leading-none">Aaden's</p>
                   <p className="text-[9px] uppercase tracking-[0.4em] text-blue-400 font-bold mt-1">Business Solutions</p>
                 </div>
               </a>
@@ -200,7 +201,7 @@ function Header() {
             <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-blue-600 shadow-lg shadow-blue-600/20">
               <span className="font-black text-sm text-white">A</span>
             </div>
-            <p className="font-heading text-sm font-black uppercase tracking-widest text-white">Ardens</p>
+            <p className="font-heading text-sm font-black uppercase tracking-widest text-white">Aaden's</p>
           </a>
 
           {/* Nav Links */}
@@ -257,12 +258,22 @@ function Header() {
               ))}
             </div>
 
+            {/* Desktop-only Motion Toggle */}
             <button
               onClick={toggleMotion}
-              className="flex h-10 w-10 items-center justify-center rounded-full bg-white/5 border border-white/10 text-white/60 hover:text-blue-400 transition-all"
+              className="hidden lg:flex h-10 w-10 items-center justify-center rounded-full bg-white/5 border border-white/10 text-white/60 hover:text-blue-400 transition-all"
             >
               {isMotionEnabled ? <Zap className="h-4 w-4" /> : <ZapOff className="h-4 w-4" />}
             </button>
+
+            {/* Mobile-only Phone Link instead of lightning symbol */}
+            <a
+              href="tel:+918077915694"
+              className="lg:hidden flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-blue-600/10 border border-blue-500/20 text-blue-400 text-[10px] font-black tracking-tight hover:bg-blue-600 hover:text-white transition-all mr-1"
+            >
+              <PhoneCall className="h-3 w-3" />
+              <span>+91 8077915694</span>
+            </a>
 
             <button
               className="flex h-10 w-10 items-center justify-center rounded-xl bg-white/5 border border-white/10 text-white lg:hidden"
@@ -438,7 +449,7 @@ function HeroVisual() {
                   transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
                 >
                   <p className="mb-3 text-[10px] font-black uppercase tracking-[0.32em] text-white/55">
-                    Ardens Field Work
+                    Aaden's Field Work
                   </p>
                   <h3 className="font-heading text-3xl font-black leading-tight text-white md:text-5xl">
                     {activeImage.title}
@@ -552,7 +563,7 @@ function ModelScrollShowcase() {
           >
             <img
               src="/videos/model.webp"
-              alt="Ardens multi-service business model"
+              alt="Aaden's multi-service business model"
               className="w-[108vw] max-w-none h-auto select-none drop-shadow-2xl mt-4"
               draggable={false}
             />
@@ -582,7 +593,7 @@ function ModelScrollShowcase() {
             >
               <img
                 src="/videos/model.webp"
-                alt="Ardens multi-service business model"
+                alt="Aaden's multi-service business model"
                 className="mx-auto w-[1240px] max-w-none select-none drop-shadow-2xl"
                 draggable={false}
               />
@@ -1120,7 +1131,7 @@ function Services() {
                 Valued <span className="text-orange-600">Site</span> Planning.
               </h2>
               <p className="mt-8 text-lg leading-relaxed text-slate-600 md:text-xl">
-                Turnkey civil work and office interiors. From workstation setup to industrial fabrication, Ardens combines planning with precision execution.
+                Turnkey civil work and office interiors. From workstation setup to industrial fabrication, Aaden's combines planning with precision execution.
               </p>
 
               <div className="mt-12 grid grid-cols-2 gap-8">
@@ -1240,7 +1251,7 @@ function QuoteEstimator() {
           <SectionHeading
             eyebrow="Smart Quotation"
             title="Get a practical project range before the site visit."
-            copy="Select your rough requirement and Ardens will map the probable investment range. Final pricing depends on site inspection and support scope."
+            copy="Select your rough requirement and Aaden's will map the probable investment range. Final pricing depends on site inspection and support scope."
             variant="blue"
           />
 
@@ -1303,7 +1314,7 @@ function QuoteEstimator() {
                 </p>
 
               <div className="mt-10 flex flex-wrap gap-4">
-                  <MagneticButton href={whatsappUrl(`Hi Ardens, I want a quotation for ${service} in ${location}. Business size: ${size}, scale: ${scale}.`)} variant="primary">
+                  <MagneticButton href={whatsappUrl(`Hi Aaden's, I want a quotation for ${service} in ${location}. Business size: ${size}, scale: ${scale}.`)} variant="primary">
                     Send Requirement
                   </MagneticButton>
                   <MagneticButton href={`tel:${siteConfig.phone}`} variant="secondary" className="border-slate-200 bg-white text-slate-600 hover:bg-slate-50">
@@ -1324,7 +1335,7 @@ function WhyChooseBento() {
     <section className="py-24 md:py-32 relative overflow-hidden">
       <div className="container-x">
         <SectionHeading
-          eyebrow="Why Choose Ardens"
+          eyebrow="Why Choose Aaden's"
           title="Built for businesses that need one accountable infrastructure partner."
           align="center"
         />
@@ -1471,7 +1482,7 @@ function Footer() {
               <ShieldCheck className="h-6 w-6 md:h-7 md:w-7 text-white" />
             </div>
             <div className="flex flex-col">
-              <p className="font-heading text-lg md:text-xl font-black uppercase tracking-widest leading-none">Ardens</p>
+              <p className="font-heading text-lg md:text-xl font-black uppercase tracking-widest leading-none">Aaden's</p>
               <p className="text-[9px] md:text-[10px] uppercase tracking-[0.4em] text-blue-400 font-black mt-1">Business Solutions</p>
             </div>
           </div>
@@ -1613,7 +1624,7 @@ export function HomePage() {
                 transition={{ delay: 0.4, duration: 1, ease: [0.16, 1, 0.3, 1] }}
                 className="mt-6 max-w-xl text-base leading-relaxed text-slate-600 md:text-lg text-balance font-medium"
               >
-                Why deal with multiple vendors when one trusted partner can manage it all? From construction and electrical work to CCTV installation, IT solutions, repairs, and coworking spaces — Ardens Business Solutions is your complete business setup partner.
+                Why deal with multiple vendors when one trusted partner can manage it all? From construction and electrical work to CCTV installation, IT solutions, repairs, and coworking spaces — Aaden's Business Solutions is your complete business setup partner.
               </motion.p>
 
               <motion.div
@@ -1630,7 +1641,7 @@ export function HomePage() {
                 </MagneticButton>
               </motion.div>
 
-              {/* Highly creative comparison of Multi-Vendor Tension vs. Ardens' Peace of Mind */}
+              {/* Highly creative comparison of Multi-Vendor Tension vs. Aaden's Peace of Mind */}
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -1659,7 +1670,7 @@ export function HomePage() {
                   <div className="pl-0 sm:pl-4">
                     <p className="text-[10px] font-black uppercase tracking-[0.2em] text-green-600 mb-3 flex items-center gap-1.5">
                       <span className="h-1.5 w-1.5 rounded-full bg-green-500 animate-pulse" />
-                      The Peace (Ardens' Way)
+                      The Peace (Aaden's Way)
                     </p>
                     <div className="space-y-2">
                       <p className="text-xs font-bold text-slate-900 flex items-center gap-2">
@@ -1741,7 +1752,7 @@ export function HomePage() {
             <SectionHeading
               eyebrow="Recent Deployments"
               title="Local Dehradun projects with a clean execution mindset."
-              copy="A premium website should show real operational credibility. These sample deployment patterns reflect the type of work Ardens handles for local commercial clients."
+              copy="A premium website should show real operational credibility. These sample deployment patterns reflect the type of work Aaden's handles for local commercial clients."
               variant="blue"
             />
 
@@ -1850,7 +1861,7 @@ export function HomePage() {
           <div className="container-x relative">
             <SectionHeading
               eyebrow="Trust & Credibility"
-              title="Dehradun businesses choose Ardens for sharp execution and reliability."
+              title="Dehradun businesses choose Aaden's for sharp execution and reliability."
               align="center"
               variant="orange"
             />
@@ -1914,7 +1925,7 @@ export function HomePage() {
                   Ready To <span className="text-blue-500">Upgrade</span> Your Assets?
                 </h2>
                 <p className="mt-10 max-w-2xl text-lg leading-relaxed text-white/40 md:text-xl font-medium">
-                  Talk to Ardens for CCTV, fiber networking, office interiors, electrical work, or a professional workspace solutions. One team, total accountability.
+                  Talk to Aaden's for CCTV, fiber networking, office interiors, electrical work, or a professional workspace solutions. One team, total accountability.
                 </p>
 
                 <div className="mt-12 flex flex-wrap gap-8">
@@ -1938,7 +1949,7 @@ export function HomePage() {
                 <MagneticButton href="#quotation" variant="blue" className="h-16 text-xs uppercase font-black tracking-widest bg-blue-600 border-blue-600 hover:bg-white hover:text-slate-900 transition-all shadow-xl shadow-blue-500/20">
                   Schedule Consultation
                 </MagneticButton>
-                <MagneticButton href={whatsappUrl("Hi Ardens, I want to upgrade my business infrastructure. Please call me back.")} variant="whatsapp" className="h-16 text-xs uppercase font-black tracking-widest bg-emerald-500 border-emerald-500 hover:bg-white hover:text-emerald-600 transition-all shadow-xl shadow-emerald-500/20">
+                <MagneticButton href={whatsappUrl("Hi Aaden's, I want to upgrade my business infrastructure. Please call me back.")} variant="whatsapp" className="h-16 text-xs uppercase font-black tracking-widest bg-emerald-500 border-emerald-500 hover:bg-white hover:text-emerald-600 transition-all shadow-xl shadow-emerald-500/20">
                   WhatsApp Support
                 </MagneticButton>
                 <MagneticButton href={`tel:${siteConfig.phone}`} variant="secondary" className="h-16 text-xs uppercase font-black tracking-widest border-white/10 bg-white/5 text-white hover:bg-white hover:text-slate-900 transition-all">
@@ -1953,14 +1964,14 @@ export function HomePage() {
 
       {/* Floating WhatsApp Button */}
       <motion.a
-        href={whatsappUrl("Hi Ardens, I'm interested in your infrastructure solutions.")}
+        href={whatsappUrl("Hi Aaden's, I'm interested in your infrastructure solutions.")}
         target="_blank"
         rel="noopener noreferrer"
         initial={{ opacity: 0, scale: 0.5 }}
         animate={{ opacity: 1, scale: 1 }}
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.9 }}
-        className="fixed bottom-8 right-8 z-[100] h-16 w-16 rounded-full bg-emerald-500 text-white flex items-center justify-center shadow-2xl shadow-emerald-500/40 border-4 border-white group"
+        className="fixed bottom-8 right-8 z-[100] h-16 w-16 rounded-full bg-emerald-500 text-white hidden md:flex items-center justify-center shadow-2xl shadow-emerald-500/40 border-4 border-white group"
       >
         <div className="absolute inset-0 rounded-full animate-ping bg-emerald-400 opacity-20 group-hover:opacity-40" />
         <svg

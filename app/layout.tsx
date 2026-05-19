@@ -6,6 +6,7 @@ import { siteConfig } from "@/data/site";
 import { SmoothScroll } from "@/components/SmoothScroll";
 import { Noise } from "@/components/Noise";
 import { CustomCursor } from "@/components/CustomCursor";
+import { MobileSocialSidebar } from "@/components/MobileSocialSidebar";
 import { MotionProvider } from "@/context/MotionContext";
 
 const inter = Inter({
@@ -30,13 +31,14 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
   title: {
-    default: "Ardens Business Solutions | Infrastructure, CCTV, Fiber Networking & Co-working in Dehradun",
-    template: "%s | Ardens Business Solutions"
+    default: "Aaden's Business Solutions | Infrastructure, CCTV, Fiber Networking & Co-working in Dehradun",
+    template: "%s | Aaden's Business Solutions"
   },
   description:
-    "Ardens Business Solutions is a Dehradun-based multi-domain infrastructure company for CCTV installation, fiber networking, server setup, electrical solutions, civil work, office interiors, and co-working space.",
+    "Aaden's Business Solutions is a Dehradun-based multi-domain infrastructure company for CCTV installation, fiber networking, server setup, electrical solutions, civil work, office interiors, and co-working space.",
   keywords: [
-    "Ardens Business Solutions",
+    "Aaden's Business Solutions",
+    "Aaden's",
     "CCTV installation Dehradun",
     "fiber networking Dehradun",
     "office interiors Dehradun",
@@ -46,9 +48,9 @@ export const metadata: Metadata = {
     "civil construction Dehradun",
     "business infrastructure Uttarakhand"
   ],
-  authors: [{ name: "Ardens Business Solutions" }],
-  creator: "Ardens Business Solutions",
-  publisher: "Ardens Business Solutions",
+  authors: [{ name: "Aaden's Business Solutions" }],
+  creator: "Aaden's Business Solutions",
+  publisher: "Aaden's Business Solutions",
   alternates: {
     canonical: "/"
   },
@@ -57,7 +59,7 @@ export const metadata: Metadata = {
     locale: "en_IN",
     url: siteConfig.url,
     siteName: siteConfig.name,
-    title: "Ardens Business Solutions | Smart Infrastructure Solutions in Dehradun",
+    title: "Aaden's Business Solutions | Smart Infrastructure Solutions in Dehradun",
     description:
       "Premium civil, IT, electrical, CCTV, fiber networking, server setup, and workspace solutions for Dehradun businesses.",
     images: [
@@ -71,7 +73,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Ardens Business Solutions | Dehradun Infrastructure Experts",
+    title: "Aaden's Business Solutions | Dehradun Infrastructure Experts",
     description:
       "CCTV, fiber networking, civil construction, office interiors, electrical systems, and co-working space in Dehradun.",
     images: ["https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=1200&q=80"]
@@ -95,6 +97,7 @@ export default function RootLayout({ children }: Readonly<{ children: ReactNode 
         <MotionProvider>
           <Noise />
           <CustomCursor />
+          <MobileSocialSidebar />
           <SmoothScroll>{children}</SmoothScroll>
         </MotionProvider>
       </body>
