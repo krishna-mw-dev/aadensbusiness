@@ -95,7 +95,7 @@ export function ServiceImageSlideshow() {
     >
       {/* Interactive Light Flare */}
       <motion.div
-        className="absolute w-[500px] h-[500px] rounded-full pointer-events-none z-0 opacity-20 blur-[120px]"
+        className="absolute w-[500px] h-[500px] rounded-full pointer-events-none z-0 opacity-20 blur-[120px] hidden md:block"
         style={{
           background: images[current].accent === "orange" ? "radial-gradient(circle, #f97316 0%, transparent 70%)" : "radial-gradient(circle, #3b82f6 0%, transparent 70%)",
           left: flareLeft,

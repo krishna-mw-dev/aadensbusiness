@@ -219,7 +219,7 @@ export function ServiceLanding({ page }: ServiceLandingProps) {
       <SectionReveal className="py-24 bg-white border-t border-slate-200">
         <div className="container-x overflow-hidden rounded-[3rem] border border-slate-200 bg-slate-50 p-10 md:p-20 relative shadow-2xl shadow-slate-200/50">
           <div className={cn(
-            "absolute top-0 right-0 w-96 h-96 blur-[100px] -z-10",
+            "absolute top-0 right-0 w-96 h-96 blur-[100px] -z-10 hidden md:block",
             isSafety ? "bg-orange-500/5" : "bg-blue-500/5"
           )} />
           <div className="grid items-center gap-12 lg:grid-cols-[1fr_auto]">

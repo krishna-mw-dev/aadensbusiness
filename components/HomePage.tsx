@@ -366,9 +366,9 @@ function HeroVisual() {
         animate={{
           backgroundColor: activeImage.accent === "orange" ? "rgba(249, 115, 22, 0.12)" : "rgba(37, 99, 235, 0.12)"
         }}
-        className="absolute h-[520px] w-[520px] rounded-full blur-[130px]"
+        className="absolute h-[520px] w-[520px] rounded-full blur-[130px] hidden md:block"
       />
-      <div className="absolute right-0 top-20 h-64 w-64 rounded-full bg-slate-900/5 blur-[90px]" />
+      <div className="absolute right-0 top-20 h-64 w-64 rounded-full bg-slate-900/5 blur-[90px] hidden md:block" />
 
       <motion.div
         className="relative z-10 w-full max-w-[620px]"
@@ -654,7 +654,7 @@ function SecuritySection() {
         </div>
         {/* Grid Mask for World-Class look */}
         <div className="absolute inset-0 grid-mask opacity-20 invert pointer-events-none" />
-        <div className="absolute top-0 right-0 w-96 h-96 bg-white/10 blur-[100px] rounded-full -translate-y-1/2 translate-x-1/2" />
+        <div className="absolute top-0 right-0 w-96 h-96 bg-white/10 blur-[100px] rounded-full -translate-y-1/2 translate-x-1/2 hidden md:block" />
 
         <div className="container-x relative z-10">
           <div className="grid gap-12 lg:grid-cols-2 items-center">
@@ -919,7 +919,7 @@ function Services() {
                   <p className="text-sm font-bold uppercase tracking-widest opacity-80">Trusted Deployments</p>
                 </div>
               </div>
-              <div className="absolute -top-12 -left-12 w-48 h-48 bg-blue-600/5 rounded-full blur-3xl" />
+              <div className="absolute -top-12 -left-12 w-48 h-48 bg-blue-600/5 rounded-full blur-3xl hidden md:block" />
             </motion.div>
             <motion.div
               initial={{ opacity: 0, x: 30 }}
@@ -1021,7 +1021,7 @@ function Services() {
               className="bg-slate-900 p-12 rounded-[3rem] border border-white/5 shadow-2xl flex flex-col justify-between text-white relative overflow-hidden"
             >
               {/* Background accent */}
-              <div className="absolute top-0 right-0 w-32 h-32 bg-blue-600/20 blur-[60px] rounded-full" />
+              <div className="absolute top-0 right-0 w-32 h-32 bg-blue-600/20 blur-[60px] rounded-full hidden md:block" />
 
               <div className="relative z-10">
                 <h3 className="font-heading text-4xl font-black text-white mb-6 uppercase tracking-tight">Private Offices</h3>
@@ -1076,7 +1076,7 @@ function Services() {
           overlayOpacity={0.05}
           className="-z-10"
         />
-        <div className="absolute top-0 right-0 w-1/2 h-full bg-orange-600/5 blur-[120px] -z-10" />
+        <div className="absolute top-0 right-0 w-1/2 h-full bg-orange-600/5 blur-[120px] -z-10 hidden md:block" />
         <div className="container-x relative">
           <div className="grid gap-16 lg:grid-cols-[1.1fr_0.9fr] items-center">
             <motion.div
@@ -1562,8 +1562,8 @@ export function HomePage() {
           <div className="absolute inset-0 grid-mask opacity-[0.05] -z-10" />
 
           {/* Very subtle background elements */}
-          <div className="absolute top-0 left-1/4 w-[800px] h-[800px] bg-blue-600/[0.03] blur-[180px] -z-10" />
-          <div className="absolute bottom-0 right-1/4 w-[800px] h-[800px] bg-orange-600/[0.02] blur-[180px] -z-10" />
+          <div className="absolute top-0 left-1/4 w-[800px] h-[800px] bg-blue-600/[0.03] blur-[180px] -z-10 hidden md:block" />
+          <div className="absolute bottom-0 right-1/4 w-[800px] h-[800px] bg-orange-600/[0.02] blur-[180px] -z-10 hidden md:block" />
 
           <div className="container-x relative grid items-center gap-16 lg:grid-cols-[1fr_0.9fr]">
             <motion.div
@@ -1851,8 +1851,8 @@ export function HomePage() {
           <div className="container-x overflow-hidden rounded-[2rem] md:rounded-[4rem] border border-slate-200 bg-slate-950 p-8 md:p-24 relative shadow-2xl shadow-blue-500/10">
             {/* High-tech background patterns */}
             <div className="absolute inset-0 grid-mask opacity-10 pointer-events-none" />
-            <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-blue-600/10 blur-[120px] rounded-full -translate-y-1/2 translate-x-1/2" />
-            <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-orange-600/5 blur-[100px] rounded-full translate-y-1/2 -translate-x-1/2" />
+            <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-blue-600/10 blur-[120px] rounded-full -translate-y-1/2 translate-x-1/2 hidden md:block" />
+            <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-orange-600/5 blur-[100px] rounded-full translate-y-1/2 -translate-x-1/2 hidden md:block" />
 
             <div className="grid items-center gap-16 lg:grid-cols-[1.2fr_0.8fr] relative z-10">
               <motion.div
