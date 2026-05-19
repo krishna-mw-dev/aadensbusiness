@@ -545,7 +545,7 @@ function ModelScrollShowcase() {
         <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-blue-500/30 to-transparent" />
         <div className="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-orange-500/30 to-transparent" />
 
-        <div className="container-x relative z-10 flex flex-col items-center justify-center">
+        <div className="w-full px-2 relative z-10 flex flex-col items-center justify-center">
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}
@@ -556,7 +556,7 @@ function ModelScrollShowcase() {
             <img
               src="/videos/model.webp"
               alt="Ardens multi-service business model"
-              className="w-full h-auto max-w-[90vw] select-none drop-shadow-2xl"
+              className="w-full h-auto max-w-[98vw] select-none drop-shadow-2xl"
               draggable={false}
             />
           </motion.div>
